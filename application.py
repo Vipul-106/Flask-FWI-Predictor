@@ -15,6 +15,7 @@ standar_scaler = pickle.load(open('Models/scaler.pkl', 'rb'))
 
 # Define the route for the home page
 @app.route('/')
+@app.route('/home')
 def home():
     return render_template('index.html')
 
@@ -47,3 +48,6 @@ def predict_datapoint():
 # Run the app if this file is executed directly
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
+
+
+    
