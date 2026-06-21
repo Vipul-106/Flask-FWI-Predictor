@@ -31,7 +31,11 @@ def predict_datapoint():
         Classes = float(request.form.get("Classes"))
         Region = float(request.form.get("Region"))
 
-        new_scaled_values = standar_scaler.transform([[Temperature, RH, Ws, Rain, FFMC, DMC, ISI, Classes, Region]])
+        input_data = pd.DataFrame([[Temperature, RH, Ws, Rain, FFMC, DMC, ISI, Classes, Region]], 
+                                   columns=['Temperature', 'RH', 'Ws', 'Rain', 'FFMC', 'DMC', 'ISI', 'Classes', 'Region'])
+
+        
+        new_scaled_values = standar_scaler.transform(input_data)
         result = ridge_model.predict(new_scaled_values)
 
         return render_template('Home.html', results=result[0])
